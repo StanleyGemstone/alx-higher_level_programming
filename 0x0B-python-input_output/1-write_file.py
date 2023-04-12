@@ -1,17 +1,14 @@
 #!/usr/bin/python3
 """
-This file contains functiom
-that returns the number of lines
-of a text file
+This file contains function that
+writes a string to text file and returns
+number of characters written
 """
 
 
-def number_of_lines(filename=""):
+def write_file(filename="", text=""):
     """
-    function returns number of lines
+    function to write to files
     """
-    i = 0
-    with open(filename, encoding="utf-8") as myFile:
-        for line in myFile:
-            i += 1
-    return (i)
+    with open(filename, mode="w", encoding="utf-8") as myFile:
+        return (myFile.write(str(text)))
