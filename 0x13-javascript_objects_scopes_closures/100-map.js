@@ -1,5 +1,10 @@
 #!/usr/bin/node
 const { list } = require('./100-data.js');
-console.log(list);
-const newList = list.map((x, index) => x * index);
-console.log(newList);
+
+function computeNewArray(inputArray) {
+  return inputArray.map((value, index) => value * index);
+}
+
+console.log("Initial list:", list);
+console.log("New list:", computeNewArray(list));
+
