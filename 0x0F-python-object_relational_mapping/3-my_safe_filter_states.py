@@ -15,10 +15,14 @@ if __name__ == '__main__':
         charset='utf8'
     )
     cursor = database.cursor()
-    query = 'SELECT * FROM states ORDER BY id ASC'
+    state_name = argv[4].replace('"', '')
+    query = 'SELECT * FROM states WHERE name = "{}" ORDER BY id ASC'.format(
+        state_name
+    )
     cursor.execute(query)
     states = cursor.fetchall()
     for state in states:
-        print(state)
+        if state[1] == state_name:
+            print(state)
     cursor.close()
     database.close()

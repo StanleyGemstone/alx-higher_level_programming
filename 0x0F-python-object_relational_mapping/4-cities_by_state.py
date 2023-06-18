@@ -15,10 +15,13 @@ if __name__ == '__main__':
         charset='utf8'
     )
     cursor = database.cursor()
-    query = 'SELECT * FROM states ORDER BY id ASC'
+    rows = 'cities.id, cities.name, states.name'
+    query = 'SELECT {} FROM cities JOIN states on states.id = state_id'.format(
+        rows
+    )
     cursor.execute(query)
     states = cursor.fetchall()
-    for state in states:
-        print(state)
+    for city in states:
+        print(city)
     cursor.close()
     database.close()
