@@ -1,31 +1,18 @@
 #!/usr/bin/python3
-'''File Doc'''
+"""
+List all cities of a state
+"""
+import sys
 import MySQLdb
-from sys import argv
-
 
 if __name__ == '__main__':
-    '''init by filename'''
-    database = MySQLdb.connect(
-        host='localhost',
-        port=3306,
-        user=argv[1],
-        passwd=argv[2],
-        db=argv[3],
-        charset='utf8'
-    )
-    cursor = database.cursor()
-    state_name = argv[4].replace('"', '')
-    rows = 'cities.name'
-    joinment = 'JOIN states on states.id = state_id'
-    condition = 'WHERE states.name = "{}"'.format(state_name)
-    query = 'SELECT {} FROM cities {} {}'.format(
-        rows,
-        joinment,
-        condition,
-    )
-    cursor.execute(query)
-    states = cursor.fetchall()
-    print(', '.join(city[0] for city in states))
-    cursor.close()
-    database.close()
+    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2],
+                         db=sys.argv[3], port=3306)
+
+    cur = db.cursor()
+    cur.execute("SELECT cities.id, cities.name, states.name \
+    FROM cities JOIN states ON cities.state_id = states.id \
+    WHERE states.name = '{}';".format(sys.argv[4]))
+    states = cur.fetchall()
+
+    print(", ".join([state[1] for state in states]))

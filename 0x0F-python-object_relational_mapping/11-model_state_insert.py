@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Prints the State object with the name passed as argument from the db
+Adds the State object "Lousiana" to the database hbtn_0e_6_usa
 """
 import sys
 from model_state import Base, State
@@ -15,5 +15,8 @@ if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    state = session.query(State).filter(State.name == sys.argv[4]).first()
-    print("Not found" if not state else state.id)
+    newState = State(name='Louisiana')
+    session.add(newState)
+    session.commit()
+
+    print(newState.id)
