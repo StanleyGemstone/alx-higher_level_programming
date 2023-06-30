@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+git add ..
+git commit -m "0x11-python-network_1"
+git push
